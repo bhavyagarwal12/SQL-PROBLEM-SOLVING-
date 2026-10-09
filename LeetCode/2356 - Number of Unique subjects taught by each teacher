@@ -1,0 +1,81 @@
+# LeetCode 2356 — Number of Unique Subjects Taught by Each Teacher
+
+**Difficulty:** Easy
+**Platform:** LeetCode
+**Topic:** SQL, GROUP BY, COUNT, DISTINCT
+**Language:** MySQL
+
+## Problem Summary
+
+Write a solution to find the number of unique subjects each teacher teaches in the university.
+
+The `Teacher` table contains the following columns:
+
+* `teacher_id` — ID of the teacher
+* `subject_id` — ID of the subject
+* `dept_id` — ID of the department
+
+A teacher may teach the same subject in multiple departments, but each subject should be counted only once per teacher.
+
+Return the result table containing:
+
+* `teacher_id`
+* `cnt` — number of unique subjects taught by that teacher
+
+## SQL Solution
+
+```sql
+SELECT
+    teacher_id,
+    COUNT(DISTINCT subject_id) AS cnt
+FROM Teacher
+GROUP BY teacher_id;
+```
+
+## Approach
+
+1. **Group by teacher:** Use `GROUP BY teacher_id` to create a group for each teacher.
+2. **Count unique subjects:** Use `COUNT(DISTINCT subject_id)` to count each subject only once for each teacher.
+3. **Rename the output:** Use `AS cnt` to match the required column name.
+
+## Key SQL Concepts
+
+* `GROUP BY` — groups records belonging to the same teacher.
+* `COUNT()` — counts values in each group.
+* `DISTINCT` — eliminates duplicate subject IDs before counting.
+* `AS` — assigns an alias to the result column.
+
+## Example
+
+Suppose the `Teacher` table contains:
+
+| teacher_id | subject_id | dept_id |
+| ---------: | ---------: | ------: |
+|          1 |          2 |       3 |
+|          1 |          2 |       4 |
+|          1 |          3 |       3 |
+|          2 |          1 |       1 |
+
+Expected output:
+
+| teacher_id | cnt |
+| ---------: | --: |
+|          1 |   2 |
+|          2 |   1 |
+
+Teacher 1 teaches subjects 2 and 3. Subject 2 appears in two departments, but it is counted only once.
+
+## Complexity Analysis
+
+* **Time Complexity:** Approximately O(n) for scanning the table, with additional work for distinct aggregation depending on the execution plan.
+* **Space Complexity:** Depends on the number of teacher groups and distinct subject values maintained during aggregation.
+
+## Key Learning
+
+The key concept is **`COUNT(DISTINCT column)` with `GROUP BY`**. Use this pattern when you need to count unique values separately for each group.
+
+---
+
+**LeetCode Problem:** [2356 — Number of Unique Subjects Taught by Each Teacher](https://leetcode.com/problems/number-of-unique-subjects-taught-by-each-teacher/)
+
+#SQL #LeetCode #MySQL #DataAnalytics #SQLPractice
