@@ -1,0 +1,34 @@
+# LeetCode 596 — Classes More Than 5 Students
+
+## 📌 Problem
+
+Find all classes that have at least five students.
+
+## 🛠️ Approach
+
+* Used `GROUP BY` to group records by class.
+* Used `COUNT(student)` to count students in each class.
+* Used `HAVING` to filter classes with at least 5 students.
+
+## 💻 SQL Solution
+
+```sql
+SELECT class
+FROM Courses
+GROUP BY class
+HAVING COUNT(student) >= 5;
+```
+
+## 🧠 Key Learnings
+
+* `GROUP BY` groups rows with the same class.
+* `COUNT()` counts non-NULL values.
+* `HAVING` filters groups after aggregation, unlike `WHERE`, which filters individual rows before grouping.
+
+## 🎯 Concepts Practiced
+
+`GROUP BY` | `COUNT()` | `HAVING`
+
+Continuing my SQL practice journey with LeetCode! 🚀
+
+#SQL #LeetCode #DataAnalytics #LearningSQL #100DaysOfCode
