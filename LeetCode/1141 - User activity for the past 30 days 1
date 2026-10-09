@@ -1,0 +1,58 @@
+# LeetCode 1141 — User Activity for the Past 30 Days I
+
+**Difficulty:** Easy
+**Platform:** LeetCode
+**Topic:** SQL, Aggregation, GROUP BY, DISTINCT, Date Filtering
+**Language:** SQL server  
+
+## Problem Summary
+
+Write a solution to find the number of **daily active users** during the 30-day period ending on July 27, 2019 (inclusive).
+
+A user is considered active on a day if they performed at least one activity on that day.
+
+Return the result table with the following columns:
+
+* `day` — the activity date
+* `active_users` — the number of unique active users on that date
+
+## SQL Solution
+
+```sql
+SELECT
+    activity_date AS day,
+    COUNT(DISTINCT user_id) AS active_users
+FROM Activity
+WHERE activity_date > '2019-06-27'
+  AND activity_date <= '2019-07-27'
+GROUP BY activity_date;
+```
+
+## Approach
+
+1. **Filter dates:** Select activities from June 28, 2019, through July 27, 2019, inclusive.
+2. **Group by date:** Use `GROUP BY activity_date` to create a separate group for each day.
+3. **Count unique users:** Use `COUNT(DISTINCT user_id)` to count each user only once per day.
+4. **Rename the column:** Use `AS day` to match the required output column name.
+
+## Key SQL Concepts
+
+* `WHERE` — filters records based on the date range.
+* `GROUP BY` — groups activities by date.
+* `COUNT(DISTINCT user_id)` — counts unique users while ignoring duplicate activities by the same user on the same day.
+* `AS` — assigns an alias to a column.
+
+## Complexity Analysis
+
+* **Time Complexity:** Approximately O(n) for filtering and aggregation under typical hash-based execution; actual performance depends on the database execution plan and indexes.
+* **Space Complexity:** Depends on the number of distinct activity dates and the database's aggregation strategy.
+
+## Key Learning
+
+The main takeaway is that **daily active users are not the same as daily activities**. A user may perform multiple activities on one day, but should be counted only once for that date.
+
+---
+
+**LeetCode Problem:** [1141 — User Activity for the Past 30 Days I](https://leetcode.com/problems/user-activity-for-the-past-30-days-i/)
+
+#SQL #LeetCode #MySQL #DataAnalytics #SQLPractice
