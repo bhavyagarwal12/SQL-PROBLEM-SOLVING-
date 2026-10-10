@@ -1,0 +1,48 @@
+# LeetCode 619 — Biggest Single Number
+
+**Difficulty:** Easy  
+**Topics:** SQL, Subqueries, GROUP BY, HAVING, MAX()
+
+## Problem Description
+
+Find the largest number in the `MyNumbers` table that appears only once. If no such number exists, return `NULL`.
+
+## SQL Solution (MySQL)
+
+```sql
+SELECT MAX(num) AS num
+FROM MyNumbers
+WHERE num IN (
+    SELECT num
+    FROM MyNumbers
+    GROUP BY num
+    HAVING COUNT(*) = 1
+);
+```
+
+## Approach
+
+1. **GROUP BY:** Group identical numbers together.
+2. **COUNT():** Count how many times each number appears.
+3. **HAVING COUNT(*) = 1:** Keep only numbers that appear exactly once.
+4. **Subquery with IN:** Filter the table to include only those unique numbers.
+5. **MAX():** Return the largest number among them.
+
+## Key Learnings
+
+- `GROUP BY` groups identical values.
+- `HAVING` filters groups based on aggregate conditions.
+- `COUNT(*) = 1` identifies values that occur exactly once.
+- `MAX()` finds the largest eligible value.
+- `MAX()` returns `NULL` if there are no eligible numbers.
+
+## Complexity Analysis
+
+- **Time Complexity:** Depends on the database execution plan and indexes; grouping and aggregation may require scanning the table.
+- **Space Complexity:** Depends on the execution plan and intermediate grouping results.
+
+## What I Learned
+
+This problem helped me understand how to combine subqueries, aggregate functions, `GROUP BY`, and `HAVING` to identify unique values and find the maximum among them.
+
+#LeetCode #SQL #MySQL #Database #SQLPractice #DataAnalytics #100DaysOfCode
