@@ -1,0 +1,35 @@
+# LeetCode 1729 — Find Followers Count
+
+**Difficulty:** Easy  
+**Topic:** SQL | `GROUP BY` | Aggregate Functions | `ORDER BY`
+
+## Problem Description
+Write a solution to find the number of followers for each user. Return the result table ordered by `user_id` in ascending order.
+
+## SQL Solution (MySQL)
+
+```sql
+SELECT
+    user_id,
+    COUNT(follower_id) AS followers_count
+FROM Followers
+GROUP BY user_id
+ORDER BY user_id ASC;
+```
+
+## Approach
+1. **SELECT:** Retrieve `user_id` and the number of followers.
+2. **COUNT():** Count the followers for each user.
+3. **GROUP BY:** Group records by `user_id`.
+4. **ORDER BY:** Sort the results by `user_id` in ascending order.
+
+## Key Learnings
+- `COUNT()` is used to count follower records.
+- `GROUP BY` combines rows belonging to the same user.
+- `ORDER BY ... ASC` sorts user IDs from smallest to largest.
+
+## Complexity Analysis
+- **Time Complexity:** Approximately O(n log n) when sorting is required.
+- **Space Complexity:** Depends on the database execution plan and grouping/sorting operations.
+
+#SQL #LeetCode #Database #MySQL #SQLPractice #100DaysOfCode
