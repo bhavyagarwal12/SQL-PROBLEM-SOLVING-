@@ -1,0 +1,44 @@
+# LeetCode 570 — Managers with at Least 5 Direct Reports
+
+**Difficulty:** Medium  
+**Topic:** SQL, Self Join, GROUP BY, HAVING, Aggregate Functions
+
+## Problem Description
+Write a solution to find managers who have at least five direct reports. Return the result table in any order.
+
+## SQL Solution (MySQL)
+
+```sql
+SELECT e2.name
+FROM Employee e1
+INNER JOIN Employee e2
+    ON e1.managerId = e2.id
+GROUP BY e2.id, e2.name
+HAVING COUNT(*) >= 5;
+```
+
+## Approach
+
+1. **Self Join:** Join the `Employee` table with itself to connect employees with their managers.
+2. **Join Condition:** Match `e1.managerId` with `e2.id` to identify each employee's manager.
+3. **GROUP BY:** Group records by manager ID and name.
+4. **COUNT():** Count the direct reports for each manager.
+5. **HAVING:** Filter the groups to keep only managers with five or more direct reports.
+
+## Key Learnings
+
+- **Self Join:** A table can be joined with itself using different aliases.
+- **GROUP BY:** Groups records belonging to the same manager.
+- **HAVING:** Filters groups based on aggregate conditions.
+- **COUNT(*):** Counts the employee rows associated with each manager.
+
+## Complexity Analysis
+
+- **Time Complexity:** Depends on the database execution plan and indexes; grouping and joining may require processing the employee table.
+- **Space Complexity:** Depends on the execution plan and intermediate grouping results.
+
+## What I Learned
+
+This problem helped me understand how to use a self join to connect employees with their managers and how `GROUP BY` and `HAVING` work together to identify managers with at least five direct reports.
+
+#LeetCode #SQL #MySQL #Database #SQLPractice #DataAnalytics #100DaysOfCode
